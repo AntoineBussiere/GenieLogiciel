@@ -26,7 +26,7 @@ public class Panier extends Observable {
     }
     
     public boolean estVide() {
-        return listOrange.size() == 0;
+        return listOrange.isEmpty();
     }
     
     public Orange getAt(int i){
