@@ -16,5 +16,6 @@ public class App
         
         p1.ajoute();
         p1.ajoute();
+        p1.ajoute();
     }
 }

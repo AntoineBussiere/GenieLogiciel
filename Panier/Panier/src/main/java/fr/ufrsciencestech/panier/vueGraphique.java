@@ -5,17 +5,25 @@
  */
 package fr.ufrsciencestech.panier;
 
+import java.util.Observable;
+
 /**
  *
  * @author ab841673
  */
 public class vueGraphique extends javax.swing.JFrame {
 
+    
     /**
      * Creates new form vueGraphique
      */
+
     public vueGraphique() {
         initComponents();
+    }
+    
+    public void update(Observable o, Object arg){
+        
     }
 
     /**
@@ -35,6 +43,11 @@ public class vueGraphique extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         add.setText("Ajouter orange");
+        add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addActionPerformed(evt);
+            }
+        });
 
         affiche.setColumns(20);
         affiche.setRows(5);
@@ -73,6 +86,10 @@ public class vueGraphique extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
+        affiche.setText("loool");
+    }//GEN-LAST:event_addActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -106,6 +123,10 @@ public class vueGraphique extends javax.swing.JFrame {
                 new vueGraphique().setVisible(true);
             }
         });
+        
+        Panier p = new Panier(20);
+        Controleur c = new Controleur();
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
