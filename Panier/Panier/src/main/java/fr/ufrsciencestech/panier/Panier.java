@@ -14,7 +14,7 @@ import java.util.Observable;
  */
 public class Panier extends Observable {
     private ArrayList<Orange> listOrange;
-    private int maxOrange;
+    private final int maxOrange;
 
     public Panier(int max) {
         listOrange = new ArrayList(max);
@@ -86,9 +86,17 @@ public class Panier extends Observable {
     }
     
     public void retire(){
-        listOrange.remove(listOrange.size());
+        listOrange.remove(listOrange.size()-1);
         setChanged();
         notifyObservers(listOrange.size());
+    }
+    
+    public void error(int error){
+        setChanged();
+        if(error == 0)
+            notifyObservers(-1);
+        if(error == 1)
+            notifyObservers(-2);
     }
     
     public int getPrix(){

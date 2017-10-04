@@ -6,25 +6,40 @@
 package fr.ufrsciencestech.panier;
 
 import java.util.Observable;
+import java.awt.event.*;
 
 /**
  *
  * @author ab841673
  */
-public class vueGraphique extends javax.swing.JFrame {
+public class vueGraphique extends javax.swing.JFrame implements Vue {
 
-    
+    Controleur c;
+        
     /**
      * Creates new form vueGraphique
      */
-
+    
     public vueGraphique() {
         initComponents();
+        affiche.setEditable(false);
     }
     
     public void update(Observable o, Object arg){
-        
+        if(arg.equals(-1))
+            affiche.setText("Panier plein : impossible d'ajouter un élément");
+        else if(arg.equals(-2))
+            affiche.setText("Panier vide : impossible de retirer un élément");
+        else affiche.setText("Nombre d'orange : "+arg);
     }
+    
+    public void addControleur(Controleur c){
+        this.c = c;
+    }
+    
+    /*public int getValeur(ActionEvent e){
+       
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,6 +69,11 @@ public class vueGraphique extends javax.swing.JFrame {
         jScrollPane1.setViewportView(affiche);
 
         rm.setText("Retirer orange");
+        rm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rmActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,8 +107,12 @@ public class vueGraphique extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-        affiche.setText("loool");
+        c.actionPerformed(evt);
     }//GEN-LAST:event_addActionPerformed
+
+    private void rmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rmActionPerformed
+        c.actionPerformed(evt);
+    }//GEN-LAST:event_rmActionPerformed
 
     /**
      * @param args the command line arguments
@@ -124,8 +148,7 @@ public class vueGraphique extends javax.swing.JFrame {
             }
         });
         
-        Panier p = new Panier(20);
-        Controleur c = new Controleur();
+        
         
     }
 

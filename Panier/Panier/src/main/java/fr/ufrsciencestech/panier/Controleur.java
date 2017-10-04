@@ -17,7 +17,20 @@ public class Controleur implements ActionListener{
     vueGraphique vg;
     
     public void actionPerformed(ActionEvent e) { 
+        if(e.getActionCommand().equals("Ajouter orange"))
+        {
+            if(p.estPlein())
+                p.error(0);
+            else
+                p.ajoute();
+        }
         
+        if(e.getActionCommand().equals("Retirer orange"))
+        {
+            if(p.estVide())
+                p.error(1);
+            else p.retire();
+        }
     }
 
     public void setModele(Panier p) {

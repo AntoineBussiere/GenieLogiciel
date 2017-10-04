@@ -9,13 +9,16 @@ public class App
     public static void main( String[] args )
     {
         Panier p1 = new Panier(20);
+        Controleur c = new Controleur();
+        vueGraphique vg = new vueGraphique();
         
-        vueConsole vue = new vueConsole();
+        vg.addControleur(c);
+        c.setModele(p1);
+        c.setVue(vg);
+        p1.addObserver(vg);
         
-        p1.addObserver(vue);
+        vg.setVisible(true);
         
-        p1.ajoute();
-        p1.ajoute();
-        p1.ajoute();
+        
     }
 }
