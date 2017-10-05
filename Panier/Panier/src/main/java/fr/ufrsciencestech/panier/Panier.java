@@ -12,8 +12,9 @@ import java.util.Observable;
  *
  * @author ab841673
  */
+
 public class Panier extends Observable {
-    private ArrayList<Orange> listOrange;
+    private ArrayList listOrange;
     private final int maxOrange;
 
     public Panier(int max) {
@@ -29,7 +30,7 @@ public class Panier extends Observable {
         return listOrange.isEmpty();
     }
     
-    public Orange getAt(int i){
+    public Object getAt(int i){
         return listOrange.get(i);
     }
     
@@ -80,12 +81,51 @@ public class Panier extends Observable {
         else
             notifyObservers(-1);
         
-        
-        
     }
     
-    public void ajoute(Orange o){
-        listOrange.add(o);
+    public String affiche(){
+        String res = "";
+        int nbClass = 0;
+        boolean trouve;
+        int nbb = 0, nbo = 0;
+        
+        for(int i = 0; i < listOrange.size(); i++)
+        {
+            trouve = false;
+            for(int j = 0; j < i; j++)
+                if(listOrange.get(i).getClass().equals(listOrange.get(j).getClass()))
+                    trouve = true;
+            
+            if(!trouve)
+                nbClass++;
+        }
+        
+        for(int i = 0; i < listOrange.size(); i++) 
+        {
+            if(listOrange.get(i).getClass().equals(Orange.class))
+                nbo++;
+            else if(listOrange.get(i).getClass().equals(Banane.class)) 
+                nbb++;
+        }
+        
+        res += "Nombre d'orange : "+nbo+"\nNombre de banane : "+nbb;
+        
+        return res;
+    }
+    
+    public void ajoute(Object o){
+        if(o.getClass().equals(Orange.class))
+        {
+            listOrange.add((Orange)o);
+            setChanged();
+            notifyObservers(this.affiche());
+        }
+        else if(o.getClass().equals(Banane.class))
+        {
+            listOrange.add((Banane)o);
+            setChanged();
+            notifyObservers(this.affiche());
+        }
     }
     
     public void retire(){
@@ -94,26 +134,78 @@ public class Panier extends Observable {
         if(!listOrange.isEmpty())
         {
             listOrange.remove(listOrange.size()-1);
-            notifyObservers(listOrange.size());
+            notifyObservers(this.affiche());
         }
         else 
             notifyObservers(-2);
-            
+         
+    }
+    
+    public int getElement(Object obj){
+        int pos = -1;
+        boolean trouve = false;
+        int i = listOrange.size()-1;
         
-        
+        while(!trouve || i >= 0){
+            if(listOrange.get(i).getClass().equals(obj))
+            {
+                trouve = true;
+                pos = i;
+            }
+            i--;
+                
+        }
+        return pos;
+    }
+    
+    public void retire(Object obj){
+        if(obj.equals(Banane.class)||obj.equals(Orange.class))
+        {
+            listOrange.remove(getElement(obj));
+            setChanged();
+            notifyObservers(this.affiche());
+        }
     }
     
     public int getPrix(){
         int res = 0;
         for(int i = 0; i < listOrange.size();i++)
-            res += listOrange.get(i).getPrix();
+        {
+            if(listOrange.get(i).getClass().equals(Orange.class))
+                res += ((Orange)listOrange.get(i)).getPrix();
+            if(listOrange.get(i).getClass().equals(Banane.class))
+                res += ((Banane)listOrange.get(i)).getPrix();
+        }
+            
         return res;
     }
     
     public void boycotteOrigine(String pays){
+        String s = "";
+        
         for(int i = 0; i < listOrange.size();i++)
-            if(listOrange.get(i).getOrigine().equals(pays))
-                listOrange.remove(i);
+        {
+            if(listOrange.get(i).getClass().equals(Orange.class))
+            {
+                s = ((Orange)listOrange.get(i)).getOrigine();
+                
+                if(s.equals(pays))
+                {
+                    listOrange.remove(i);
+                    setChanged();
+                    notifyObservers(listOrange.size());
+                }
+            }
+            else if(listOrange.get(i).getClass().equals(Banane.class))
+                s = ((Banane)listOrange.get(i)).getOrigine();
+            
+                if(s.equals(pays))
+                {
+                    listOrange.remove(i);
+                    setChanged();
+                    notifyObservers(listOrange.size());
+                }
+        }
     }
     
     

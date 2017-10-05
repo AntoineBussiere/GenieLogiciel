@@ -59,7 +59,7 @@ public class PanierTest extends TestCase {
         Panier instance = new Panier(1);
         instance.ajoute();
         Orange expResult = null;
-        Orange result = instance.getAt(i);
+        Object result = instance.getAt(i);
         assertEquals(expResult, result);
     }
 

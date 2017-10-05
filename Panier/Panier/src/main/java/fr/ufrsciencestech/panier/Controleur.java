@@ -17,12 +17,30 @@ public class Controleur implements ActionListener{
     vueGraphique vg;
     
     public void actionPerformed(ActionEvent e) { 
+        String s = e.getActionCommand().substring(0,e.getActionCommand().indexOf(" "));
+        
+        if(s.equals("Boyc"))
+        {
+            
+            String t = e.getActionCommand().substring(e.getActionCommand().indexOf(" ")+1);
+            p.boycotteOrigine(t);
+        }
+        
+        
         if(e.getActionCommand().equals("Ajouter orange"))
-            p.ajoute();
+            p.ajoute(new Orange());
+        
+        
+        if(e.getActionCommand().equals("Ajouter banane"))
+            p.ajoute(new Banane());
+        
+        
+        if(e.getActionCommand().equals("Retirer banane"))
+            p.retire(Banane.class);
         
         
         if(e.getActionCommand().equals("Retirer orange"))
-            p.retire();
+            p.retire(Orange.class);
     }
 
     public void setModele(Panier p) {

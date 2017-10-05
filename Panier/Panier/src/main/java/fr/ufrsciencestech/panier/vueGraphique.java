@@ -31,7 +31,7 @@ public class vueGraphique extends javax.swing.JFrame implements Vue {
             affiche.setText("Panier plein : impossible d'ajouter un élément");
         else if(arg.equals(-2))
             affiche.setText("Panier vide : impossible de retirer un élément");
-        else affiche.setText("Nombre d'orange : "+arg);
+        else affiche.setText(arg.toString());
     }
     
     public void addControleur(Controleur c){
@@ -51,10 +51,18 @@ public class vueGraphique extends javax.swing.JFrame implements Vue {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jEditorPane1 = new javax.swing.JEditorPane();
         add = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         affiche = new javax.swing.JTextArea();
         rm = new javax.swing.JButton();
+        addb = new javax.swing.JButton();
+        rmb = new javax.swing.JButton();
+        textBoyc = new javax.swing.JTextField();
+        boyc = new javax.swing.JButton();
+
+        jScrollPane2.setViewportView(jEditorPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,6 +84,27 @@ public class vueGraphique extends javax.swing.JFrame implements Vue {
             }
         });
 
+        addb.setText("Ajouter banane");
+        addb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addbActionPerformed(evt);
+            }
+        });
+
+        rmb.setText("Retirer banane");
+        rmb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rmbActionPerformed(evt);
+            }
+        });
+
+        boyc.setText("Boycotter");
+        boyc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boycActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,8 +113,12 @@ public class vueGraphique extends javax.swing.JFrame implements Vue {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(add, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(rm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                    .addComponent(rm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(rmb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(textBoyc)
+                    .addComponent(boyc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -101,6 +134,14 @@ public class vueGraphique extends javax.swing.JFrame implements Vue {
                         .addComponent(add)
                         .addGap(18, 18, 18)
                         .addComponent(rm)
+                        .addGap(18, 18, 18)
+                        .addComponent(addb)
+                        .addGap(18, 18, 18)
+                        .addComponent(rmb)
+                        .addGap(18, 18, 18)
+                        .addComponent(textBoyc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(boyc)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -114,6 +155,18 @@ public class vueGraphique extends javax.swing.JFrame implements Vue {
     private void rmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rmActionPerformed
         c.actionPerformed(evt);
     }//GEN-LAST:event_rmActionPerformed
+
+    private void addbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbActionPerformed
+        c.actionPerformed(evt);
+    }//GEN-LAST:event_addbActionPerformed
+
+    private void rmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rmbActionPerformed
+        c.actionPerformed(evt);
+    }//GEN-LAST:event_rmbActionPerformed
+
+    private void boycActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boycActionPerformed
+        c.actionPerformed(new ActionEvent(evt.getSource(),evt.getID(),"Boyc "+textBoyc.getText()));
+    }//GEN-LAST:event_boycActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,8 +208,14 @@ public class vueGraphique extends javax.swing.JFrame implements Vue {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add;
+    private javax.swing.JButton addb;
     private javax.swing.JTextArea affiche;
+    private javax.swing.JButton boyc;
+    private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton rm;
+    private javax.swing.JButton rmb;
+    private javax.swing.JTextField textBoyc;
     // End of variables declaration//GEN-END:variables
 }
