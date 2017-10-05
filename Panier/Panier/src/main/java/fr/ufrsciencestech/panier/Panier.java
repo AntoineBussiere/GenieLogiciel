@@ -38,7 +38,9 @@ public class Panier extends Observable {
         double taille = 0;
         for(int i = 0; i < listOrange.size();i++)
         {
-            if(listOrange.get(i).getClass().equals(Banane.class))
+            if(listOrange.get(i).getClass().equals(Orange.class))
+                taille += 1;
+            else if(listOrange.get(i).getClass().equals(Banane.class))
                 taille += 1.5;
         }
         

@@ -51,7 +51,31 @@ public class ControleurTest extends TestCase {
     public void testActionPerformed3() {
         System.out.println("actionPerformed");
         JButton j = new JButton();
-        ActionEvent e = new ActionEvent(j,0,"Test");
+        ActionEvent e = new ActionEvent(j,0,"Test Test");
+        Controleur instance = new Controleur();
+        instance.actionPerformed(e);
+    }
+    
+    public void testActionPerformed4() {
+        System.out.println("actionPerformed");
+        JButton j = new JButton();
+        ActionEvent e = new ActionEvent(j,0,"Ajouter banane");
+        Controleur instance = new Controleur();
+        instance.actionPerformed(e);
+    }
+    
+    public void testActionPerformed5() {
+        System.out.println("actionPerformed");
+        JButton j = new JButton();
+        ActionEvent e = new ActionEvent(j,0,"Retirer banane");
+        Controleur instance = new Controleur();
+        instance.actionPerformed(e);
+    }
+    
+    public void testActionPerformed6() {
+        System.out.println("actionPerformed");
+        JButton j = new JButton();
+        ActionEvent e = new ActionEvent(j,0,"Boyc France");
         Controleur instance = new Controleur();
         instance.actionPerformed(e);
     }

@@ -69,6 +69,8 @@ public class PanierTest extends TestCase {
     public void testSize() {
         System.out.println("size");
         Panier instance = new Panier(5);
+        instance.ajoute(new Banane());
+        instance.ajoute(new Orange());
         int expResult = 0;
         double result = instance.size();
         assertEquals(expResult, result);
@@ -153,11 +155,12 @@ public class PanierTest extends TestCase {
     /**
      * Test of ajoute method, of class Panier.
      */
-    public void testAjoute_Orange() {
+    public void testAjoute_Objet() {
         System.out.println("ajoute");
-        Orange o = new Orange();
-        Panier instance = new Panier(5);
-        instance.ajoute(o);
+        Panier p = new Panier(2);
+        p.ajoute(new Banane());
+        p.ajoute(new Banane());
+        p.ajoute(new Orange());
     }
 
     /**
@@ -176,22 +179,58 @@ public class PanierTest extends TestCase {
      */
     public void testGetPrix() {
         System.out.println("getPrix");
-        Panier instance = new Panier(5);
-        instance.ajoute();
+        Panier p = new Panier(5);
+        p.ajoute(new Banane());
+        p.ajoute(new Orange());
         int expResult = 0;
-        int result = instance.getPrix();
+        int result = p.getPrix();
         assertEquals(expResult, result);
     }
 
     /**
      * Test of boycotteOrigine method, of class Panier.
      */
-    public void testBoycotteOrigine() {
+    public void testBoycotteOrigine1() {
         System.out.println("boycotteOrigine");
         String pays = "France";
         Panier instance = new Panier(5);
         instance.ajoute();
         instance.boycotteOrigine(pays);
+    }
+    
+    public void testBoycotteOrigine2() {
+        System.out.println("boycotteOrigine");
+        String pays = "France";
+        Panier instance = new Panier(5);
+        instance.ajoute(new Banane());
+        instance.boycotteOrigine(pays);
+    }
+    
+    public void testAffiche(){
+        Panier p = new Panier(5);
+        p.ajoute(new Banane());
+        p.ajoute(new Banane());
+        p.ajoute(new Orange());
+    }
+    
+    public void testGetElement(){
+        Panier p = new Panier(5);
+        p.ajoute(new Orange());
+        p.ajoute(new Banane());
+        int expResult = 0;
+        int result = p.getElement(Banane.class);
+        assertEquals(expResult, result);
+        
+        result = p.getElement(Orange.class);
+        assertEquals(expResult, result);
+        
+    }
+    
+    public void testRetireObjet(){
+        Panier p = new Panier(5);
+        p.ajoute(new Orange());
+        p.retire(Panier.class);
+        p.retire(Orange.class);
     }
     
 }

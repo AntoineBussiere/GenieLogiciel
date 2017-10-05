@@ -47,9 +47,7 @@ public class Banane {
             return false;
         }
         final Banane other = (Banane) obj;
-        if (Double.doubleToLongBits(this.prix) != Double.doubleToLongBits(other.prix)) {
-            return false;
-        }
+        
         if(!(this.origine.equals(other.origine)))
             return false;
         return true;
