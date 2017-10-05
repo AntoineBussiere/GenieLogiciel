@@ -70,7 +70,7 @@ public class PanierTest extends TestCase {
         System.out.println("size");
         Panier instance = new Panier(5);
         int expResult = 0;
-        int result = instance.size();
+        double result = instance.size();
         assertEquals(expResult, result);
     }
 

@@ -34,8 +34,15 @@ public class Panier extends Observable {
         return listOrange.get(i);
     }
     
-    public int size(){
-        return listOrange.size();
+    public double size(){
+        double taille = 0;
+        for(int i = 0; i < listOrange.size();i++)
+        {
+            if(listOrange.get(i).getClass().equals(Banane.class))
+                taille += 1.5;
+        }
+        
+        return taille;
     }
 
     @Override
@@ -73,7 +80,7 @@ public class Panier extends Observable {
     public void ajoute(){
         setChanged();
     
-        if(listOrange.size() != maxOrange)
+        if(listOrange.size() < maxOrange)
         {
             listOrange.add(new Orange());
             notifyObservers(listOrange.size());
@@ -116,15 +123,31 @@ public class Panier extends Observable {
     public void ajoute(Object o){
         if(o.getClass().equals(Orange.class))
         {
-            listOrange.add((Orange)o);
-            setChanged();
-            notifyObservers(this.affiche());
+            if(this.size()+1 <= maxOrange)
+            {
+                listOrange.add((Orange)o);
+                setChanged();
+                notifyObservers(this.affiche());
+            }
+            else
+            {
+                setChanged();
+                notifyObservers(-1);
+            }
         }
         else if(o.getClass().equals(Banane.class))
         {
-            listOrange.add((Banane)o);
-            setChanged();
-            notifyObservers(this.affiche());
+            if(this.size()+1.5 <= maxOrange)
+            {
+                listOrange.add((Banane)o);
+                setChanged();
+                notifyObservers(this.affiche());
+            }
+            else
+            {
+                setChanged();
+                notifyObservers(-1);
+            }
         }
     }
     
@@ -182,8 +205,8 @@ public class Panier extends Observable {
     
     public void boycotteOrigine(String pays){
         String s = "";
-        
-        for(int i = 0; i < listOrange.size();i++)
+        int size = listOrange.size()-1;
+        for(int i = size; i >= 0;i--)
         {
             if(listOrange.get(i).getClass().equals(Orange.class))
             {
@@ -193,18 +216,20 @@ public class Panier extends Observable {
                 {
                     listOrange.remove(i);
                     setChanged();
-                    notifyObservers(listOrange.size());
+                    notifyObservers(this.affiche());
                 }
             }
             else if(listOrange.get(i).getClass().equals(Banane.class))
+            {
                 s = ((Banane)listOrange.get(i)).getOrigine();
             
                 if(s.equals(pays))
                 {
                     listOrange.remove(i);
                     setChanged();
-                    notifyObservers(listOrange.size());
+                    notifyObservers(this.affiche());
                 }
+            }
         }
     }
     
