@@ -61,9 +61,8 @@ public class Orange {
         if (Double.doubleToLongBits(this.prix) != Double.doubleToLongBits(other.prix)) {
             return false;
         }
-        if ((this.origine == null) ? (other.origine != null) : !this.origine.equals(other.origine)) {
+        if(!(this.origine.equals(other.origine)))
             return false;
-        }
         return true;
     }
     

@@ -8,7 +8,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        Panier p1 = new Panier(20);
+        /*Panier p1 = new Panier(20);
         Controleur c = new Controleur();
         vueGraphique vg = new vueGraphique();
         
@@ -17,7 +17,7 @@ public class App
         c.setVue(vg);
         p1.addObserver(vg);
         
-        vg.setVisible(true);
+        vg.setVisible(true);*/
         
         
     }

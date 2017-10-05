@@ -47,12 +47,6 @@ public class Panier extends Observable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 7;
-        return hash;
-    }
-
-    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -76,9 +70,18 @@ public class Panier extends Observable {
     
     
     public void ajoute(){
-        listOrange.add(new Orange());
         setChanged();
-        notifyObservers(listOrange.size());
+    
+        if(listOrange.size() != maxOrange)
+        {
+            listOrange.add(new Orange());
+            notifyObservers(listOrange.size());
+        }
+        else
+            notifyObservers(-1);
+        
+        
+        
     }
     
     public void ajoute(Orange o){
@@ -86,17 +89,18 @@ public class Panier extends Observable {
     }
     
     public void retire(){
-        listOrange.remove(listOrange.size()-1);
         setChanged();
-        notifyObservers(listOrange.size());
-    }
-    
-    public void error(int error){
-        setChanged();
-        if(error == 0)
-            notifyObservers(-1);
-        if(error == 1)
+        
+        if(!listOrange.isEmpty())
+        {
+            listOrange.remove(listOrange.size()-1);
+            notifyObservers(listOrange.size());
+        }
+        else 
             notifyObservers(-2);
+            
+        
+        
     }
     
     public int getPrix(){

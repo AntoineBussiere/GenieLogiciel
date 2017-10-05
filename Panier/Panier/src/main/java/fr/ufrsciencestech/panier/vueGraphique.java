@@ -23,6 +23,7 @@ public class vueGraphique extends javax.swing.JFrame implements Vue {
     public vueGraphique() {
         initComponents();
         affiche.setEditable(false);
+        affiche.setLineWrap(true);
     }
     
     public void update(Observable o, Object arg){
