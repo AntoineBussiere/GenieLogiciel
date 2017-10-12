@@ -28,6 +28,7 @@ public class VueTest extends TestCase {
     }
 
     public void testSomeMethod() {
+        Vue v = new vueGraphique();
     }
     
 }

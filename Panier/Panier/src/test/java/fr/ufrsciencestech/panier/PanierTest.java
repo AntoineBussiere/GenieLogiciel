@@ -213,24 +213,4 @@ public class PanierTest extends TestCase {
         p.ajoute(new Orange());
     }
     
-    public void testGetElement(){
-        Panier p = new Panier(5);
-        p.ajoute(new Orange());
-        p.ajoute(new Banane());
-        int expResult = 0;
-        int result = p.getElement(Banane.class);
-        assertEquals(expResult, result);
-        
-        result = p.getElement(Orange.class);
-        assertEquals(expResult, result);
-        
-    }
-    
-    public void testRetireObjet(){
-        Panier p = new Panier(5);
-        p.ajoute(new Orange());
-        p.retire(Panier.class);
-        p.retire(Orange.class);
-    }
-    
 }

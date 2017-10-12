@@ -14,44 +14,35 @@ import java.util.Observable;
  */
 
 public class Panier extends Observable {
-    private ArrayList listOrange;
-    private final int maxOrange;
+    private ArrayList<Fruit> listFruits;
+    private final int maxFruits;
 
     public Panier(int max) {
-        listOrange = new ArrayList(max);
-        maxOrange = max;
+        listFruits = new ArrayList(max);
+        maxFruits = max;
     }
     
     public boolean estPlein() {
-        return listOrange.size() == maxOrange;
+        return listFruits.size() == maxFruits;
     }
     
     public boolean estVide() {
-        return listOrange.isEmpty();
+        return listFruits.isEmpty();
     }
     
-    public Object getAt(int i){
-        return listOrange.get(i);
+    public Fruit getAt(int i){
+        return listFruits.get(i);
     }
     
     public double size(){
-        double taille = 0;
-        for(int i = 0; i < listOrange.size();i++)
-        {
-            if(listOrange.get(i).getClass().equals(Orange.class))
-                taille += 1;
-            else if(listOrange.get(i).getClass().equals(Banane.class))
-                taille += 1.5;
-        }
-        
-        return taille;
+        return listFruits.size();
     }
 
     @Override
     public String toString() {
         String res = "";
-        for(int i = 0; i < listOrange.size();i++)
-            res += listOrange.get(i).toString();
+        for(int i = 0; i < listFruits.size();i++)
+            res += listFruits.get(i).toString();
         
         return res;
     }
@@ -68,11 +59,11 @@ public class Panier extends Observable {
             return false;
         }
         final Panier other = (Panier) obj; 
-        if(other.size()!=listOrange.size())
+        if(other.size()!=listFruits.size())
             return false;
         boolean res = true;
-        for(int i = 0; i < listOrange.size();i++){
-            if(!listOrange.get(i).equals(other.getAt(i)))
+        for(int i = 0; i < listFruits.size();i++){
+            if(!listFruits.get(i).equals(other.getAt(i)))
                 res= false;
         }
         return res;
@@ -82,10 +73,10 @@ public class Panier extends Observable {
     public void ajoute(){
         setChanged();
     
-        if(listOrange.size() < maxOrange)
+        if(listFruits.size() < maxFruits)
         {
-            listOrange.add(new Orange());
-            notifyObservers(listOrange.size());
+            listFruits.add(new Orange());
+            notifyObservers(listFruits.size());
         }
         else
             notifyObservers(-1);
@@ -96,69 +87,41 @@ public class Panier extends Observable {
         String res = "";
         int nbClass = 0;
         boolean trouve;
-        int nbb = 0, nbo = 0;
         
-        for(int i = 0; i < listOrange.size(); i++)
+        for(int i = 0; i < listFruits.size(); i++)
         {
             trouve = false;
             for(int j = 0; j < i; j++)
-                if(listOrange.get(i).getClass().equals(listOrange.get(j).getClass()))
+                if(listFruits.get(i).getClass().equals(listFruits.get(j).getClass()))
                     trouve = true;
             
             if(!trouve)
                 nbClass++;
         }
         
-        for(int i = 0; i < listOrange.size(); i++) 
-        {
-            if(listOrange.get(i).getClass().equals(Orange.class))
-                nbo++;
-            else if(listOrange.get(i).getClass().equals(Banane.class)) 
-                nbb++;
-        }
-        
-        res += "Nombre d'orange : "+nbo+"\nNombre de banane : "+nbb;
-        
         return res;
     }
     
-    public void ajoute(Object o){
-        if(o.getClass().equals(Orange.class))
+    public void ajoute(Fruit o){
+        if(listFruits.size() < maxFruits)
         {
-            if(this.size()+1 <= maxOrange)
-            {
-                listOrange.add((Orange)o);
-                setChanged();
-                notifyObservers(this.affiche());
-            }
-            else
-            {
-                setChanged();
-                notifyObservers(-1);
-            }
+            listFruits.add(o);
+            setChanged();
+            notifyObservers(this.affiche());
         }
-        else if(o.getClass().equals(Banane.class))
+        else
         {
-            if(this.size()+1.5 <= maxOrange)
-            {
-                listOrange.add((Banane)o);
-                setChanged();
-                notifyObservers(this.affiche());
-            }
-            else
-            {
-                setChanged();
-                notifyObservers(-1);
-            }
+            setChanged();
+            notifyObservers(-1);
         }
     }
     
     public void retire(){
         setChanged();
         
-        if(!listOrange.isEmpty())
+        if(!listFruits.isEmpty())
         {
-            listOrange.remove(listOrange.size()-1);
+            listFruits.remove(listFruits.size()-1);
             notifyObservers(this.affiche());
         }
         else 
@@ -166,40 +129,28 @@ public class Panier extends Observable {
          
     }
     
-    public int getElement(Object obj){
-        int pos = -1;
+    public void retire(Fruit f){
         boolean trouve = false;
-        int i = listOrange.size()-1;
-        
-        while(!trouve || i >= 0){
-            if(listOrange.get(i).getClass().equals(obj))
-            {
+        int i = 0;
+        while(!trouve || i < maxFruits){
+            if(listFruits.get(i).equals(f))
                 trouve = true;
-                pos = i;
-            }
-            i--;
-                
+            else
+                i++;
         }
-        return pos;
-    }
-    
-    public void retire(Object obj){
-        if(obj.equals(Banane.class)||obj.equals(Orange.class))
+        setChanged();
+        if(trouve)
         {
-            listOrange.remove(getElement(obj));
-            setChanged();
+            listFruits.remove(i);
             notifyObservers(this.affiche());
         }
     }
     
     public int getPrix(){
         int res = 0;
-        for(int i = 0; i < listOrange.size();i++)
+        for(int i = 0; i < listFruits.size();i++)
         {
-            if(listOrange.get(i).getClass().equals(Orange.class))
-                res += ((Orange)listOrange.get(i)).getPrix();
-            if(listOrange.get(i).getClass().equals(Banane.class))
-                res += ((Banane)listOrange.get(i)).getPrix();
+            res += listFruits.get(i).getPrix();
         }
             
         return res;
@@ -207,34 +158,17 @@ public class Panier extends Observable {
     
     public void boycotteOrigine(String pays){
         String s = "";
-        int size = listOrange.size()-1;
+        int size = listFruits.size()-1;
         for(int i = size; i >= 0;i--)
         {
-            if(listOrange.get(i).getClass().equals(Orange.class))
+            s = listFruits.get(i).getOrigine();
+
+            if(s.equals(pays))
             {
-                s = ((Orange)listOrange.get(i)).getOrigine();
-                
-                if(s.equals(pays))
-                {
-                    listOrange.remove(i);
-                    setChanged();
-                    notifyObservers(this.affiche());
-                }
-            }
-            else if(listOrange.get(i).getClass().equals(Banane.class))
-            {
-                s = ((Banane)listOrange.get(i)).getOrigine();
-            
-                if(s.equals(pays))
-                {
-                    listOrange.remove(i);
-                    setChanged();
-                    notifyObservers(this.affiche());
-                }
+                listFruits.remove(i);
+                setChanged();
+                notifyObservers(this.affiche());
             }
         }
     }
-    
-    
-    
 }

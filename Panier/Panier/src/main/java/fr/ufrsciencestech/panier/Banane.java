@@ -9,49 +9,20 @@ package fr.ufrsciencestech.panier;
  *
  * @author ab841673
  */
-public class Banane {
-    private String origine;
-    private final double prix = 0.5;
-    
-    public Banane(String o){
-        origine = o;
+public class Banane extends Fruit{
+    public Banane(String origine){
+        this.prix = 0.5;
+        this.origine = origine;
     }
     
     public Banane(){
-        origine = "France";
+        this.prix = 0.0;
+        this.origine = "";
     }
 
-    
-    public String getOrigine() {
-        return origine;
-    }
-
-    
-    public void setOrigine(String origine) {
-        this.origine = origine;
-    }
-
-    public double getPrix() {
-        return prix;
-    }
-    
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Banane other = (Banane) obj;
-        
-        if(!(this.origine.equals(other.origine)))
-            return false;
-        return true;
-    }
-    
-    
+    public boolean isSeedless() 
+    {
+        return false;
+    }  
 }

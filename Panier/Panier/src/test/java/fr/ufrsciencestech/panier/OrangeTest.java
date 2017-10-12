@@ -33,7 +33,7 @@ public class OrangeTest extends TestCase {
     public void testGetPrix() {
         System.out.println("getPrix");
         Orange instance = new Orange();
-        double expResult = 0.0;
+        double expResult = 10.0;
         double result = instance.getPrix();
         assertEquals(expResult, result, 0.0);
     }
@@ -44,7 +44,7 @@ public class OrangeTest extends TestCase {
     public void testGetOrigine() {
         System.out.println("getOrigine");
         Orange instance = new Orange();
-        String expResult = "";
+        String expResult = "France";
         String result = instance.getOrigine();
         assertEquals(expResult, result);
     }

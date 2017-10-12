@@ -24,8 +24,8 @@ public class vueGraphique extends javax.swing.JFrame implements Vue {
         initComponents();
         affiche.setEditable(false);
         affiche.setLineWrap(true);
-    }
-    
+    } 
+
     public void update(Observable o, Object arg){
         if(arg.equals(-1))
             affiche.setText("Panier plein : impossible d'ajouter un élément");
@@ -53,55 +53,44 @@ public class vueGraphique extends javax.swing.JFrame implements Vue {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         jEditorPane1 = new javax.swing.JEditorPane();
-        add = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         affiche = new javax.swing.JTextArea();
-        rm = new javax.swing.JButton();
-        addb = new javax.swing.JButton();
-        rmb = new javax.swing.JButton();
         textBoyc = new javax.swing.JTextField();
         boyc = new javax.swing.JButton();
+        fruitsCB = new javax.swing.JComboBox<>();
+        Ajouter = new javax.swing.JButton();
+        Retirer = new javax.swing.JButton();
 
         jScrollPane2.setViewportView(jEditorPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        add.setText("Ajouter orange");
-        add.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addActionPerformed(evt);
-            }
-        });
-
         affiche.setColumns(20);
         affiche.setRows(5);
         jScrollPane1.setViewportView(affiche);
-
-        rm.setText("Retirer orange");
-        rm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rmActionPerformed(evt);
-            }
-        });
-
-        addb.setText("Ajouter banane");
-        addb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addbActionPerformed(evt);
-            }
-        });
-
-        rmb.setText("Retirer banane");
-        rmb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rmbActionPerformed(evt);
-            }
-        });
 
         boyc.setText("Boycotter");
         boyc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boycActionPerformed(evt);
+            }
+        });
+
+        fruitsCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Orange", "Banane" }));
+
+        Ajouter.setFont(new java.awt.Font("Dialog", 1, 8)); // NOI18N
+        Ajouter.setText("Ajouter");
+        Ajouter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AjouterActionPerformed(evt);
+            }
+        });
+
+        Retirer.setFont(new java.awt.Font("Dialog", 1, 8)); // NOI18N
+        Retirer.setText("Retirer");
+        Retirer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RetirerActionPerformed(evt);
             }
         });
 
@@ -111,14 +100,16 @@ public class vueGraphique extends javax.swing.JFrame implements Vue {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(add, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(rm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(rmb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textBoyc)
-                    .addComponent(boyc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(Ajouter)
+                            .addGap(11, 11, 11)
+                            .addComponent(Retirer, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(fruitsCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(textBoyc, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boyc, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -131,15 +122,13 @@ public class vueGraphique extends javax.swing.JFrame implements Vue {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(add)
-                        .addGap(18, 18, 18)
-                        .addComponent(rm)
-                        .addGap(18, 18, 18)
-                        .addComponent(addb)
-                        .addGap(18, 18, 18)
-                        .addComponent(rmb)
-                        .addGap(18, 18, 18)
-                        .addComponent(textBoyc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(fruitsCB, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Ajouter)
+                            .addComponent(Retirer))
+                        .addGap(111, 111, 111)
+                        .addComponent(textBoyc, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(boyc)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -148,25 +137,17 @@ public class vueGraphique extends javax.swing.JFrame implements Vue {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-        c.actionPerformed(evt);
-    }//GEN-LAST:event_addActionPerformed
-
-    private void rmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rmActionPerformed
-        c.actionPerformed(evt);
-    }//GEN-LAST:event_rmActionPerformed
-
-    private void addbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbActionPerformed
-        c.actionPerformed(evt);
-    }//GEN-LAST:event_addbActionPerformed
-
-    private void rmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rmbActionPerformed
-        c.actionPerformed(evt);
-    }//GEN-LAST:event_rmbActionPerformed
-
     private void boycActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boycActionPerformed
         c.actionPerformed(new ActionEvent(evt.getSource(),evt.getID(),"Boyc "+textBoyc.getText()));
     }//GEN-LAST:event_boycActionPerformed
+
+    private void AjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjouterActionPerformed
+        c.actionPerformed(new ActionEvent(evt.getSource(),evt.getID(),"Ajouter "+fruitsCB.getSelectedItem().toString()));
+    }//GEN-LAST:event_AjouterActionPerformed
+
+    private void RetirerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RetirerActionPerformed
+        c.actionPerformed(new ActionEvent(evt.getSource(),evt.getID(),"Retirer "+fruitsCB.getSelectedItem().toString()));
+    }//GEN-LAST:event_RetirerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,15 +188,14 @@ public class vueGraphique extends javax.swing.JFrame implements Vue {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton add;
-    private javax.swing.JButton addb;
+    private javax.swing.JButton Ajouter;
+    private javax.swing.JButton Retirer;
     private javax.swing.JTextArea affiche;
     private javax.swing.JButton boyc;
+    private javax.swing.JComboBox<String> fruitsCB;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton rm;
-    private javax.swing.JButton rmb;
     private javax.swing.JTextField textBoyc;
     // End of variables declaration//GEN-END:variables
 }

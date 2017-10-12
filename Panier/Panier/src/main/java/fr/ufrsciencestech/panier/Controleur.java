@@ -13,36 +13,37 @@ import java.awt.event.*;
  */
 public class Controleur implements ActionListener{
     
-    Panier p;
-    vueGraphique vg;
+    private Panier p;
+    private vueGraphique vg;
+    private Fruit f;
     
     public void actionPerformed(ActionEvent e) { 
         String s = e.getActionCommand().substring(0,e.getActionCommand().indexOf(" "));
+        String t = e.getActionCommand().substring(e.getActionCommand().indexOf(" ")+1);
         
         if(s.equals("Boyc"))
-        {
-            
-            String t = e.getActionCommand().substring(e.getActionCommand().indexOf(" ")+1);
             p.boycotteOrigine(t);
+        
+        if(s.equals("Ajouter"))
+        {
+            String u = "fr.ufrsciencestech.panier."+t;
+            try{
+                Class<?> c = Class.forName(u);
+                System.out.println(c.newInstance().toString());
+                
+                //p.ajoute(f);
+            }catch(Exception w){System.out.println("ça marche pas");}
+            
         }
         
-        
-        if(e.getActionCommand().equals("Ajouter orange"))
-            p.ajoute(new Orange());
-        
-        
-        if(e.getActionCommand().equals("Ajouter banane"))
-            p.ajoute(new Banane());
-        
-        
-        if(e.getActionCommand().equals("Retirer banane"))
-            p.retire(Banane.class);
-        
-        
-        if(e.getActionCommand().equals("Retirer orange"))
-            p.retire(Orange.class);
+        if(s.equals("Retirer"))
+            p.retire(f);
     }
 
+    public void setFruit(Fruit f){
+        this.f = f;
+    }
+    
     public void setModele(Panier p) {
         this.p = p;
     }
